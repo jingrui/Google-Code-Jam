@@ -36,7 +36,6 @@ public class Solution {
 	        				temp = new HashSet();
 	        			temp.add(j);
 	        			hm.put(j,temp);
-//	        			System.out.println(hm.get(j));
 	        		} else 
 	        			for (int k = 0; k < ancesnum; k++){
 	        				HashSet temp;
