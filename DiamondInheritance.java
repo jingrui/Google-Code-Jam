@@ -29,7 +29,6 @@ public class Solution {
 	        		String[] s = str.split(" ");
 	        		int ancesnum  = Integer.parseInt(s[0]);
 	        		if (ancesnum == 0){
-//	        			System.out.println(j);
 	        			HashSet temp;
 	        			if(hm.containsKey(j))
 	        				temp = hm.get(j);
