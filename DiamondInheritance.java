@@ -20,32 +20,32 @@ public class Solution {
 			BufferedWriter out = new BufferedWriter(fstream);
 			
 			int casenum = Integer.parseInt(br.readLine());
-	        for(int i = 0; i < casenum; i++){
-	        	int classnum  = Integer.parseInt(br.readLine());
-	        	HashMap<Integer, HashSet<Integer>> hm = new HashMap<Integer, HashSet<Integer>>();
-	        	for(int j = 1; j <= classnum; j++){
-	        		
-	        		String str = br.readLine();
-	        		String[] s = str.split(" ");
-	        		int ancesnum  = Integer.parseInt(s[0]);
-	        		if (ancesnum == 0){
-	        			HashSet temp;
-	        			if(hm.containsKey(j))
-	        				temp = hm.get(j);
-	        			else 
-	        				temp = new HashSet();
-	        			temp.add(j);
-	        			hm.put(j,temp);
-	        		} else 
-	        			for (int k = 0; k < ancesnum; k++){
-	        				HashSet temp;
-		        			if(hm.containsKey(Integer.parseInt(s[k+1])))
-		        				temp = hm.get(Integer.parseInt(s[k+1]));
-		        			else
+	        	for(int i = 0; i < casenum; i++){
+		        	int classnum  = Integer.parseInt(br.readLine());
+		        	HashMap<Integer, HashSet<Integer>> hm = new HashMap<Integer, HashSet<Integer>>();
+		        	for(int j = 1; j <= classnum; j++){
+		        		
+		        		String str = br.readLine();
+		        		String[] s = str.split(" ");
+		        		int ancesnum  = Integer.parseInt(s[0]);
+		        		if (ancesnum == 0){
+		        			HashSet temp;
+		        			if(hm.containsKey(j))
+		        				temp = hm.get(j);
+		        			else 
 		        				temp = new HashSet();
 		        			temp.add(j);
-		        			hm.put(Integer.parseInt(s[k+1]),temp);
-	        			}
+		        			hm.put(j,temp);
+		        		} else 
+		        			for (int k = 0; k < ancesnum; k++){
+		        				HashSet temp;
+			        			if(hm.containsKey(Integer.parseInt(s[k+1])))
+			        				temp = hm.get(Integer.parseInt(s[k+1]));
+			        			else
+			        				temp = new HashSet();
+			        			temp.add(j);
+			        			hm.put(Integer.parseInt(s[k+1]),temp);
+		        			}
 	        	}
 //	        	System.out.println(hm.keySet());
 	        	
