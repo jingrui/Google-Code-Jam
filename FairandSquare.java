@@ -76,17 +76,17 @@ public class Solution {
 	public static BigInteger count(BigInteger cur, BigInteger e, HashSet<BigInteger> hs){
 		BigInteger num = zero;
 		while(cur.compareTo(e)!= 1){
-    		BigInteger sqr = cur.pow(2);
-    		if (checkPalin(cur) == false)// check palindrome
-    			cur = cur.add(one);
-    		else if (checkPalin(sqr) == false)// check square palindrome
-    			cur = cur.add(one);
-    		else {	
-    			hs.add(cur);
-    			num = num.add(one);
-            	cur = cur.add(one);  
-    		}    		      	
-    	}
+	    		BigInteger sqr = cur.pow(2);
+	    		if (checkPalin(cur) == false)// check palindrome
+	    			cur = cur.add(one);
+	    		else if (checkPalin(sqr) == false)// check square palindrome
+	    			cur = cur.add(one);
+	    		else {	
+	    			hs.add(cur);
+	    			num = num.add(one);
+	            	cur = cur.add(one);  
+    			}    		      	
+    		}
 		return num;   	
 	}
 	
