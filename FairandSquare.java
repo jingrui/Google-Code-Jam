@@ -1,17 +1,9 @@
+// Summary: small and large-1 can be done.
+// large-2 cannot be done with my implementation.
+
 // Hash Version. 
 // C-Large-1.in:6mins
 // C-lARGE-2.in:not able to do that within time
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-
-
 public class Solution {
 	static BigInteger one = BigInteger.ONE;
 	static BigInteger zero = BigInteger.ZERO;
@@ -123,7 +115,95 @@ public class Solution {
 		  return a.subtract(BigInteger.ONE);
 	}
 }
+// this version is trying to solve C-large-2.in
+// However, even not able to finish 1st case with in 10mins
+public class Solution {
+	static BigInteger one = BigInteger.ONE;
+	static BigInteger zero = BigInteger.ZERO;
+	public static void main(String[] args){
+		
+		Date dNow = new Date( );
+	    SimpleDateFormat ft = new SimpleDateFormat ("hh:mm:ss");
+	    System.out.println("Start: " + ft.format(dNow));
+		try {
+			BufferedReader br = new BufferedReader(new FileReader("C-large-2.in"));
+			FileWriter fstream = new FileWriter("out.txt");
+			BufferedWriter out = new BufferedWriter(fstream);
 
+			String []str;
+			BigInteger s,e,temp,num;	
+			HashMap<BigInteger,Integer> hs = new HashMap<BigInteger,Integer>();
+			int casenum = Integer.parseInt(br.readLine());
+	        for(int i = 0; i < casenum; i++){
+	        	System.out.println("case ="+i);
+	        	str = br.readLine().split(" ");
+	        	s = new BigInteger(str[0]);
+	        	e = new BigInteger(str[1]);
+	        	temp = bigIntSqRootFloor(s);
+	        	if (temp.pow(2).compareTo(s) == 0)
+	        		s = temp;
+	        	else
+	        		s = temp.add(one);
+	        	e = bigIntSqRootFloor(e);
+	        	num = zero;
+	        	for(BigInteger k = s; k.compareTo(e)!= 1;k = k.add(one)){
+	        		if(hs.containsKey(k)){
+	        			if (hs.get(k) == 1) 
+	        				num = num.add(one);
+	        		} else
+	        			num.add(check(k,hs));
+	        	}
+	        	out.write("Case #"+(i+1)+": "+num+"\n");
+	        }
+	        br.close();
+	        out.close();
+	        dNow = new Date( );
+		    ft = new SimpleDateFormat ("hh:mm:ss");
+		    System.out.println("End : " + ft.format(dNow));
+	    } catch (Exception e) {
+	        System.err.println("Error:" + e.getMessage());
+	    }
+	}
+	
+	public static BigInteger check(BigInteger cur, HashMap<BigInteger,Integer> hs){
+   		BigInteger sqr = cur.pow(2);
+   		if (checkPalin(cur) == false){// check palindrome
+   			hs.put(cur, 0);
+   			return zero;
+   		}
+   		if  (checkPalin(sqr) == false){// check square palindrome
+   			hs.put(cur, 0);
+   			return zero;
+   		}
+   		hs.put(cur,1);    		      	
+		return one;   	
+	}
+	
+	public static boolean checkPalin(BigInteger cur){
+		BigInteger a = cur;
+		BigInteger b = BigInteger.ZERO;
+		while(a.compareTo(BigInteger.ZERO) == 1) {
+			BigInteger ten = new BigInteger("10");
+			b = b.multiply(ten);
+			b = b.add(new BigInteger(a.mod(ten).toString()));
+			a = a.divide(ten);
+		}		
+		return (cur.compareTo(b) == 0);
+	}
+	
+	public static BigInteger bigIntSqRootFloor(BigInteger n) {
+		  BigInteger a = BigInteger.ONE;
+		  BigInteger b = new BigInteger(n.shiftRight(5).add(new BigInteger("8")).toString());
+		  while(b.compareTo(a) >= 0) {
+		    BigInteger mid = new BigInteger(a.add(b).shiftRight(1).toString());
+		    if(mid.multiply(mid).compareTo(n) > 0) 
+		    	b = mid.subtract(BigInteger.ONE);
+		    else 
+		    	a = mid.add(BigInteger.ONE);
+		  }
+		  return a.subtract(BigInteger.ONE);
+	}
+}
 
 
 // This is still not enough to finish big input in 8 mins. It takes about 30 mins.
