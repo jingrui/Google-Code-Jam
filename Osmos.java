@@ -1,3 +1,6 @@
+//http://code.google.com/codejam/contest/2434486/dashboard#s=p0
+// correct for small input
+// not good for large one
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
